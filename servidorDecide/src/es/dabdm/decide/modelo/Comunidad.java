@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="COMUNIDADES")
@@ -41,26 +42,24 @@ public class Comunidad implements Serializable {
 	
 	private String alcance;
 	
+	private String descripcion;
+	
 	private String tipo;
 	
-	/**
-	 * Para JOSE: Hará falta que haya una función que tenga esta API:
-	 *   
-	 *   public boolean isUsuarioEnRadioComunidad(PosicionGPS gpsUsuario, PosicionGPS gpsComunidad);
-	 *   
-	 *   Esta función dirá si esta o no en el radio de la comunidad.
-	 */
+	@Transient
+    private String suscrito;
+
 	private Integer radio;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="IDMANAGER")
 	private ComunityManager gestor;
 	
-    @OneToMany(mappedBy="comunidad",fetch=FetchType.LAZY)    
+  /*  @OneToMany(mappedBy="comunidad",fetch=FetchType.LAZY)    
 	private List<Suscripcion> suscriptores;
 	
     @OneToMany(mappedBy="comunidad",fetch=FetchType.LAZY)    
-	private List<Encuesta> encuestas;
+	private List<Encuesta> encuestas;*/
     
     public Comunidad() {
 	}
@@ -137,13 +136,6 @@ public class Comunidad implements Serializable {
 		this.gestor = gestor;
 	}
 
-	public List<Suscripcion> getSuscriptores() {
-		return suscriptores;
-	}
-
-	public void setSuscriptores(List<Suscripcion> suscriptores) {
-		this.suscriptores = suscriptores;
-	}
 
 	public Integer getIdComunidad() {
 		return idComunidad;
@@ -153,13 +145,44 @@ public class Comunidad implements Serializable {
 		this.idComunidad = idComunidad;
 	}
 
+
+
+	public String getSuscrito() {
+		return suscrito;
+	}
+
+	public void setSuscrito(String suscrito) {
+		this.suscrito = suscrito;
+	}
+
+
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
+	/*public List<Suscripcion> getSuscriptores() {
+		return suscriptores;
+	}
+
+	public void setSuscriptores(List<Suscripcion> suscriptores) {
+		this.suscriptores = suscriptores;
+	}
+
+	
 	public List<Encuesta> getEncuestas() {
 		return encuestas;
 	}
 
 	public void setEncuestas(List<Encuesta> encuestas) {
 		this.encuestas = encuestas;
-	}
+	}*/
 	
 	
 	

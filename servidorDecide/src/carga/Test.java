@@ -36,7 +36,7 @@ public class Test {
 	public void crearComunityManager(){
 		Session sesion = UtilidadHibernate.getSesion();
 
-		for(int i = 0;i<10;i++){
+		for(int i = 0;i<5;i++){
 			sesion.save(new ComunityManager("nombre apellido "+i));
 		}
 		UtilidadHibernate.commit();
@@ -45,14 +45,24 @@ public class Test {
 	public void crearComunidad(){
 		Session sesion = UtilidadHibernate.getSesion();
 
+		List<ComunityManager> managers = sesion.createQuery("FROM ComunityManager").list();
+
 		PosicionGPS gps;
-		for(int i = 0;i<10;i++){
+		for(int i = 0;i<20;i++){
 			gps = new PosicionGPS(i, i);
-			sesion.save(new Comunidad("comunidad "+i, "twitter", gps, "A", "P", 200+i, (ComunityManager) sesion.get(ComunityManager.class, i)));
+
+			sesion.save(new Comunidad("comunidad "+i, "twitter", gps, "A", "P", 200+i, managers.get( (i % managers.size()) ) ));
 		}
 		UtilidadHibernate.commit();
 	}	
 	
+	
+	public void borrarBBDD(){
+		Session sesion = UtilidadHibernate.getSesion();		
+		sesion.createSQLQuery("DELETE FROM comunidades").executeUpdate();
+		sesion.createSQLQuery("DELETE FROM managers").executeUpdate();
+		UtilidadHibernate.commit();
+	}
 	/**
 	 *  Este incluye todos los demas, en el orden correcto para crear los datos
 	 */	
@@ -61,20 +71,14 @@ public class Test {
 		//......
 	}
 	
-	
-	/**
-	 * Se podría hacer este para que borre todos los datos
-	 */
-	public void borraBBDDCompleta(){
-		// HACERLO o hacer un script SQL
-	}
+
 	
 
 	public static void main(String[] args) {
 
         
 		Test cargaBBDD = new Test();	
-		//cargaBBDD.borrarBBDDCompleta();
+		cargaBBDD.borrarBBDD();
 		//cargaBBDD.crearBBDDCompleta(); //Solo llamarlo la primera vez, descomentarlo
 		cargaBBDD.crearUsuarios();
 		cargaBBDD.crearComunityManager();

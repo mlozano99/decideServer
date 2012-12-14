@@ -26,11 +26,12 @@ public class ComunityManager implements Serializable{
 	 * Identificador único del comunity manager
 	 */
 	private String nombre;
-	
+
+	/*
 	@OneToMany(mappedBy="gestor",fetch=FetchType.LAZY) 
 	private List<Comunidad> comunidades;
 	
-	
+	*/
 	public ComunityManager() {
 	}
 	
@@ -48,12 +49,7 @@ public class ComunityManager implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public List<Comunidad> getComunidades() {
-		return comunidades;
-	}
-	public void setComunidades(List<Comunidad> comunidades) {
-		this.comunidades = comunidades;
-	}
+
 	public Integer getIdManager() {
 		return idManager;
 	}
@@ -61,5 +57,10 @@ public class ComunityManager implements Serializable{
 		this.idManager = idManager;
 	}
 	
-	
+	/*	public List<Comunidad> getComunidades() {
+	return comunidades;
+}
+	public void setComunidades(List<Comunidad> comunidades) {
+		this.comunidades = comunidades;
+	}*/	
 }

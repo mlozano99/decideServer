@@ -77,7 +77,7 @@ public class Sender {
   protected final Random random = new Random();
   protected final Logger logger = Logger.getLogger(getClass().getName());
 
-  private final String key="datoKEYYYY";//A piñon
+  private final String key;//A piñon ="AIzaSyCuZugAylt6lK9hSIIMdQmcTQAJn0RWH3M"
 
   /**
    * Default constructor.
@@ -85,7 +85,7 @@ public class Sender {
    * @param key API key obtained through the Google API Console.
    */
   public Sender(String key) {
-   // this.key = nonNull(key);
+    this.key = nonNull(key);
   }
 
   /**

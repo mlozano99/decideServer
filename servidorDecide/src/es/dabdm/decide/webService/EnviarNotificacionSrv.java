@@ -2,6 +2,7 @@ package es.dabdm.decide.webService;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -15,18 +16,23 @@ import javax.ws.rs.core.MediaType;
 
 import com.google.android.gcm.server.Constants;
 import com.google.android.gcm.server.Message;
+import com.google.android.gcm.server.Message.Builder;
 import com.google.android.gcm.server.MulticastResult;
 import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
+import com.google.gson.Gson;
 
 import es.dabdm.decide.dto.ListaComunidades;
+import es.dabdm.decide.dto.Pregunta;
+import es.dabdm.decide.dto.RespuestaPosible;
 import es.dabdm.decide.servicio.ServicioConsultas;
 
 @Path("/notificar")
 public class EnviarNotificacionSrv {
 
 	private static final ServicioConsultas srvConsultas = ServicioConsultas.getServicioConsultas();
-	private static final Sender sender = new Sender(null);
+
+	private static final Sender sender = new Sender("AIzaSyCuZugAylt6lK9hSIIMdQmcTQAJn0RWH3M");
 	private static final Executor threadPool = Executors.newFixedThreadPool(5);
 	private static final int MULTICAST_SIZE = 1000;
 
@@ -36,7 +42,7 @@ public class EnviarNotificacionSrv {
 	@Consumes("application/x-www-form-urlencoded")
 	public String getFriendsHighScores(@QueryParam("regId") String regId) throws IOException {
 
-		System.out.println("regId=" + regId);
+		System.out.println("notificar peticion a las " + new Date() + "  ,notificar regId=" + regId);
 
 		String status;
 		if (regId == null || "".equals(regId)) {
@@ -52,7 +58,8 @@ public class EnviarNotificacionSrv {
 				Message message = new Message.Builder().build();
 				Result result = sender.send(message, registrationId, 5);
 				status = "Sent message to one device: " + result;
-
+                System.out.println("Despues 1. "+status);
+				 
 			} else {
 				// ESTO CUANDO SEAN MAS DE UNO
 				// send a multicast message using JSON
@@ -75,7 +82,7 @@ public class EnviarNotificacionSrv {
 				status = "Asynchronously sending " + tasks + " multicast messages to " + total + " devices";
 			}
 		}
-
+		System.out.println("Final="+status);
 		return regId;
 	}
 
@@ -85,7 +92,19 @@ public class EnviarNotificacionSrv {
 		threadPool.execute(new Runnable() {
 
 			public void run() {
-				Message message = new Message.Builder().build();
+				//Message message = new Message.Builder().build();
+				Builder builder = new Message.Builder(); 
+				
+				Pregunta pregunta = new Pregunta(1,2,"texto de la pregunta que voy a hacer");
+				List<RespuestaPosible> respuestas = new ArrayList<RespuestaPosible>();
+				respuestas.add(new RespuestaPosible(4, "Si"));
+				respuestas.add(new RespuestaPosible(4, "No"));
+				respuestas.add(new RespuestaPosible(4, "NS/NC"));
+				pregunta.setRespuestasPosibles(respuestas);
+				
+				Gson gson = new Gson();
+				builder.addData("pregunta", gson.toJson(pregunta));
+				Message message = builder.build();
 				MulticastResult multicastResult;
 				try {
 					multicastResult = sender.send(message, devices, 5);

@@ -11,8 +11,8 @@ import es.dabdm.decide.modelo.Usuario;
 import es.dabdm.decide.servicio.ServicioConsultas;
 
 
-@Path("/usuarios")
-public class UsuariosSrv {
+@Path("/posicion")
+public class PosicionSrv {
 
 	public static final ServicioConsultas srvConsultas = ServicioConsultas.getServicioConsultas();
 	
@@ -20,9 +20,9 @@ public class UsuariosSrv {
 
 	@PUT
 	@Consumes("application/x-www-form-urlencoded")
-	public void putFriend(@FormParam("name") String name) {
+	public void posicionUsuario(@FormParam("longitud")  double longitud,@FormParam("latitud")  double latitud) {
 
-		System.out.println("usuarios peticion a las " + new Date() );
+		System.out.println("posicionUsuario peticion a las " + new Date() + ", longitud="+longitud  + ", latitud="+latitud );
 		
 	}
 }

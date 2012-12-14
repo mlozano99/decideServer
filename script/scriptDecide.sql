@@ -41,6 +41,7 @@ CREATE TABLE COMUNIDADES (
      , nombre VARCHAR(100) NOT NULL
      , twitter VARCHAR(100)
      , alcance VARCHAR(100)
+     , descripcion VARCHAR(500)
      , tipo VARCHAR(5)
      , radio INTEGER
      , longitud REAL
