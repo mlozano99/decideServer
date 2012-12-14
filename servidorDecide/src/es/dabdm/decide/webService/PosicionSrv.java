@@ -7,7 +7,6 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 
-import es.dabdm.decide.modelo.Usuario;
 import es.dabdm.decide.servicio.ServicioConsultas;
 
 

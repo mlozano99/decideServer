@@ -10,9 +10,7 @@ import java.util.concurrent.Executors;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
 
 import com.google.android.gcm.server.Constants;
 import com.google.android.gcm.server.Message;
@@ -22,7 +20,6 @@ import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 import com.google.gson.Gson;
 
-import es.dabdm.decide.dto.ListaComunidades;
 import es.dabdm.decide.dto.Pregunta;
 import es.dabdm.decide.dto.RespuestaPosible;
 import es.dabdm.decide.servicio.ServicioConsultas;
@@ -55,7 +52,22 @@ public class EnviarNotificacionSrv {
 			if ("1".equals("1")) {
 				// send a single message using plain post
 				String registrationId = regId;
-				Message message = new Message.Builder().build();
+				//Message message = new Message.Builder().build();
+				Builder builder = new Message.Builder(); 
+				
+				Pregunta pregunta = new Pregunta(1,2,"texto de la pregunta que voy a hacer");
+				List<RespuestaPosible> respuestas = new ArrayList<RespuestaPosible>();
+				respuestas.add(new RespuestaPosible(4, "Si"));
+				respuestas.add(new RespuestaPosible(4, "No"));
+				respuestas.add(new RespuestaPosible(4, "NS/NC"));
+				pregunta.setRespuestasPosibles(respuestas);
+				
+				Gson gson = new Gson();
+				//builder.addData("pregunta", gson.toJson(pregunta));
+				
+				builder.addData("pregunta", "555444333222111");
+				Message message = builder.build();
+				
 				Result result = sender.send(message, registrationId, 5);
 				status = "Sent message to one device: " + result;
                 System.out.println("Despues 1. "+status);

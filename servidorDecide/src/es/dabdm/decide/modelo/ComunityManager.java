@@ -1,14 +1,11 @@
 package es.dabdm.decide.modelo;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,8 +27,8 @@ public class ComunityManager implements Serializable{
 	/*
 	@OneToMany(mappedBy="gestor",fetch=FetchType.LAZY) 
 	private List<Comunidad> comunidades;
-	
 	*/
+	
 	public ComunityManager() {
 	}
 	
@@ -56,11 +53,11 @@ public class ComunityManager implements Serializable{
 	public void setIdManager(Integer idManager) {
 		this.idManager = idManager;
 	}
-	
-	/*	public List<Comunidad> getComunidades() {
+	/*
+	public List<Comunidad> getComunidades() {
 	return comunidades;
 }
 	public void setComunidades(List<Comunidad> comunidades) {
 		this.comunidades = comunidades;
-	}*/	
+	}*/
 }

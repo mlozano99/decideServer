@@ -1,12 +1,14 @@
 package carga;
 
-import java.util.Date;
 import java.util.List;
-import es.dabdm.decide.modelo.*;
 
 import org.hibernate.Session;
 
 import util.UtilidadHibernate;
+import es.dabdm.decide.modelo.Comunidad;
+import es.dabdm.decide.modelo.ComunityManager;
+import es.dabdm.decide.modelo.PosicionGPS;
+import es.dabdm.decide.modelo.Usuario;
 
 public class Test {
 

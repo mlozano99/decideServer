@@ -24,6 +24,7 @@ public class SuscripcionesSrv {
 	@Consumes("application/x-www-form-urlencoded")
 	public void deSuscribirUsusarioComunidad(@FormParam("email") String email, @FormParam("idComunidad")Integer idComunidad) {
 		System.out.println("deSuscribirUsusarioComunidad peticion a las " + new Date() + "  ,email=" + email );
+		srvConsultas.desuscribirUsuario(email, idComunidad);
 	}	
 	
 	
@@ -31,7 +32,10 @@ public class SuscripcionesSrv {
 	@Consumes("application/x-www-form-urlencoded")
 	public void suscribirUsusarioComunidad(@FormParam("email") String email, @FormParam("idComunidad")Integer idComunidad) {
 		System.out.println("suscribirUsusarioComunidad peticion a las " + new Date() + "  ,email=" + email );
+		srvConsultas.suscribirUsuario(email, idComunidad);
 	}	
+	
+
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
@@ -39,9 +43,11 @@ public class SuscripcionesSrv {
 	public ListaComunidades getComunidadesSuscritas(@QueryParam("email") String email) {
 		
 		System.out.println("getComunidadesSuscritas peticion a las " + new Date() + "  ,email=" + email );
-
+        if(email==null||"".equals(email)){
+        	email="vacio";
+        }
 		ListaComunidades lista = new ListaComunidades();
-		lista.setComunidades( srvConsultas.getComunidades() );
+		lista.setComunidades( srvConsultas.getComunidadSuscritas(email) );
 
 		return lista;
 

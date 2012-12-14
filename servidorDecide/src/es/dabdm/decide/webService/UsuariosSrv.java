@@ -19,10 +19,9 @@ public class UsuariosSrv {
 	
 
 	@PUT
-	@Consumes("application/x-www-form-urlencoded")
-	public void putFriend(@FormParam("name") String name) {
-
-		System.out.println("usuarios peticion a las " + new Date() );
-		
+	@Consumes("application/json")
+	public void altaUsuario(Usuario usuario) {
+		System.out.println("altaUsuario peticion a las " + new Date() );
+		srvConsultas.altaUsuario(usuario);		
 	}
 }

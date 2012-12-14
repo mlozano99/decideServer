@@ -34,13 +34,6 @@ import static com.google.android.gcm.server.Constants.TOKEN_CANONICAL_REG_ID;
 import static com.google.android.gcm.server.Constants.TOKEN_ERROR;
 import static com.google.android.gcm.server.Constants.TOKEN_MESSAGE_ID;
 
-import com.google.android.gcm.server.Result.Builder;
-
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,6 +50,13 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import com.google.android.gcm.server.Result.Builder;
 
 /**
  * Helper class to send messages to the GCM service using an API Key.
