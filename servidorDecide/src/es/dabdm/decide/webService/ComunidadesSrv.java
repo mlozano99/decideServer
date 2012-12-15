@@ -21,9 +21,9 @@ public class ComunidadesSrv {
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
 	@Consumes("application/x-www-form-urlencoded")
-	public ListaComunidades getComunidades(@QueryParam("email") String email,@QueryParam("latitud") String latitud,@QueryParam("longitud") String longitud) {
+	public ListaComunidades getComunidades(@QueryParam("email") String email,@QueryParam("tipo") String tipo, @QueryParam("latitud") String latitud,@QueryParam("longitud") String longitud) {
 		
-		System.out.println("comunidades peticion a las " + new Date() + "  ,email=" + email +"  ,longitud=" + longitud + ", latitud="+latitud);
+		System.out.println("comunidades peticion a las " + new Date() + "  ,email=" + email + "  ,tipo=" + tipo +"  ,longitud=" + longitud + ", latitud="+latitud);
         if(email==null||"".equals(email)){
         	email="vacio";
         }
