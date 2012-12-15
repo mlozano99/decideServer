@@ -26,11 +26,11 @@ public class Suscripcion implements Serializable{
 	@SequenceGenerator(name="SUSCRIPCIONES_seq",sequenceName="SUSCRIPCIONES_seq")	
     private Integer idSuscripcion;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="IDCOMUNIDAD")
 	private Comunidad comunidad;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="IDUSUARIO")
 	private Usuario usuario;
 

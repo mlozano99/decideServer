@@ -33,15 +33,15 @@ public class Encuesta implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date fechaLimite;
 	
-    @ManyToMany(fetch=FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name="ENCUESTASUSUARIOS",joinColumns={@JoinColumn(name="idEncuesta")},inverseJoinColumns={@JoinColumn(name="idUsuario")})
 	private List<Usuario> usuarios;
 	
-    @OneToMany(mappedBy="encuesta",fetch=FetchType.LAZY)    
+    @OneToMany(mappedBy="encuesta")    
 	private List<Pregunta> preguntas;
    
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="IDCOMUNIDAD") 
+	@ManyToOne
+	@JoinColumn(name="idComunidad") 
 	private Comunidad comunidad;
 	
 	

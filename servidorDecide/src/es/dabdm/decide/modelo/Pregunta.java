@@ -25,7 +25,7 @@ public class Pregunta implements Serializable{
 	@SequenceGenerator(name="PREGUNTAS_seq",sequenceName="PREGUNTAS_seq")
 	private Integer idPregunta;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="IDENCUESTA")
 	private Encuesta encuesta;
 
@@ -35,7 +35,7 @@ public class Pregunta implements Serializable{
 	
 	private String texto;
 
-    @OneToMany(mappedBy="pregunta",fetch=FetchType.LAZY)    
+    @OneToMany(mappedBy="pregunta")    
 	private List<RespuestaPosible> respuestasPosibles;
 	
     

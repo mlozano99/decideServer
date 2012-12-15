@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import es.dabdm.decide.modelo.Comunidad;
+
 
 public class Pregunta implements Serializable{
 
@@ -11,7 +13,7 @@ public class Pregunta implements Serializable{
 
 	private Integer idPregunta;
 	
-	private Integer idComunidad;
+	private Comunidad comunidad;
 
 	private String texto;
     
@@ -22,10 +24,10 @@ public class Pregunta implements Serializable{
 	public Pregunta() {
 	}
 	
-	public Pregunta(Integer idPregunta, Integer idComunidad, String texto) {
+	public Pregunta(Integer idPregunta, Comunidad comunidad, String texto) {
 		super();
 		this.idPregunta = idPregunta;
-		this.idComunidad = idComunidad;
+		this.comunidad = comunidad;
 		this.texto = texto;
 	}
 
@@ -37,12 +39,12 @@ public class Pregunta implements Serializable{
 		this.idPregunta = idPregunta;
 	}
 
-	public Integer getIdComunidad() {
-		return idComunidad;
+	public Comunidad getComunidad() {
+		return comunidad;
 	}
 
-	public void setIdComunidad(Integer idComunidad) {
-		this.idComunidad = idComunidad;
+	public void setComunidad(Comunidad comunidad) {
+		this.comunidad = comunidad;
 	}
 
 	public String getTexto() {
@@ -69,4 +71,14 @@ public class Pregunta implements Serializable{
 		this.respuestasPosibles = respuestasPosibles;
 	}
 
+	@Override
+	public String toString() {
+		return "Pregunta [idPregunta=" + idPregunta + ", comunidad="
+				+ comunidad + ", texto=" + texto + ", fechaLimite="
+				+ fechaLimite + ", respuestasPosibles=" + respuestasPosibles
+				+ "]";
+	}
+
+	
+	
 }

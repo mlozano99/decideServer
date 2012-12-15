@@ -64,9 +64,10 @@ public class Comunidad implements Serializable {
     
     
     
-	public Comunidad(String nombre, String twitter, PosicionGPS gps,
+	public Comunidad(String nombre, String descripcion,String twitter, PosicionGPS gps,
 			String alcance, String tipo, Integer radio, ComunityManager gestor) {
 		super();
+		this.descripcion = descripcion;
 		this.nombre = nombre;
 		this.twitter = twitter;
 		this.gps = gps;

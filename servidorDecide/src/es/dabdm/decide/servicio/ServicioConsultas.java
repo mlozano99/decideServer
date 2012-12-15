@@ -1,5 +1,6 @@
 package es.dabdm.decide.servicio;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -142,7 +143,7 @@ public class ServicioConsultas {
 	
 	
 	/* **************************************************************************************************************************************
-	**************************************************************** RespuestaPosible ***********************************************************
+	**************************************************************** Pregunta ***********************************************************
      ****************************************************************************************************************************************/
 	public Pregunta getPregunta(Integer idPregunta){
 		try {
@@ -154,6 +155,30 @@ public class ServicioConsultas {
 		} 
 		return null;
 	}
+	
+	
+	/* **************************************************************************************************************************************
+	**************************************************************** Pregunta DTO ***********************************************************
+     ****************************************************************************************************************************************/
+	public es.dabdm.decide.dto.Pregunta getPreguntaDTO(Pregunta pregunta){
+		es.dabdm.decide.dto.Pregunta preguntaDTO =null;
+		try {
+           
+           preguntaDTO = new es.dabdm.decide.dto.Pregunta(pregunta.getIdPregunta(), pregunta.getComunidad(), pregunta.getTexto());
+           preguntaDTO.setFechaLimite(pregunta.getEncuesta().getFechaLimite());
+		   List<es.dabdm.decide.dto.RespuestaPosible> respuestasDTO = new ArrayList<es.dabdm.decide.dto.RespuestaPosible>();		   
+           for(RespuestaPosible r :pregunta.getRespuestasPosibles()){
+			   	 respuestasDTO.add(new es.dabdm.decide.dto.RespuestaPosible(r.getIdRespuestaPosible(),r.getValor()));
+		   }
+           
+           System.out.println("preguntaDTO ->"+pregunta.getTexto());
+		} catch (Exception e) {
+			System.out.println("Error en getPreguntaDTO a las " + new Date() + " " + e.getMessage());
+		} 
+		return preguntaDTO;
+	}
+	
+	
 	
 	/* **************************************************************************************************************************************
 	 **************************************************************** RespuestaPosible ***********************************************************
@@ -187,7 +212,17 @@ public class ServicioConsultas {
 			System.out.println("Error en responderPregunta a las " + new Date() + " " + e.getMessage());
 		 } 
 	  }
-	//Integer idPregunta,@QueryParam("email") String email,@QueryParam("idRespuesta") String idRespuesta
+
+
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////     UTILIDADES BBDD     //////////////////////////////////////////////	

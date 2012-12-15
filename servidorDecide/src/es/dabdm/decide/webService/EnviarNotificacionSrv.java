@@ -53,19 +53,7 @@ public class EnviarNotificacionSrv {
 				// send a single message using plain post
 				String registrationId = regId;
 				//Message message = new Message.Builder().build();
-				Builder builder = new Message.Builder(); 
-				
-				Pregunta pregunta = new Pregunta(1,2,"texto de la pregunta que voy a hacer");
-				List<RespuestaPosible> respuestas = new ArrayList<RespuestaPosible>();
-				respuestas.add(new RespuestaPosible(4, "Si"));
-				respuestas.add(new RespuestaPosible(4, "No"));
-				respuestas.add(new RespuestaPosible(4, "NS/NC"));
-				pregunta.setRespuestasPosibles(respuestas);
-				
-				Gson gson = new Gson();
-				//builder.addData("pregunta", gson.toJson(pregunta));
-				
-				builder.addData("pregunta", "555444333222111");
+				Builder builder = new Message.Builder(); 							
 				Message message = builder.build();
 				
 				Result result = sender.send(message, registrationId, 5);
@@ -105,17 +93,7 @@ public class EnviarNotificacionSrv {
 
 			public void run() {
 				//Message message = new Message.Builder().build();
-				Builder builder = new Message.Builder(); 
-				
-				Pregunta pregunta = new Pregunta(1,2,"texto de la pregunta que voy a hacer");
-				List<RespuestaPosible> respuestas = new ArrayList<RespuestaPosible>();
-				respuestas.add(new RespuestaPosible(4, "Si"));
-				respuestas.add(new RespuestaPosible(4, "No"));
-				respuestas.add(new RespuestaPosible(4, "NS/NC"));
-				pregunta.setRespuestasPosibles(respuestas);
-				
-				Gson gson = new Gson();
-				builder.addData("pregunta", gson.toJson(pregunta));
+				Builder builder = new Message.Builder(); 				
 				Message message = builder.build();
 				MulticastResult multicastResult;
 				try {

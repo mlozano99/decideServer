@@ -42,13 +42,13 @@ public class Usuario implements Serializable{
 	
 	private String publicidad;
 
-    @OneToMany(mappedBy="usuario",fetch=FetchType.LAZY)    
+    @OneToMany(mappedBy="usuario")    
 	private List<RespuestaUsuario> respuestas;
 	
-    @OneToMany(mappedBy="comunidad",fetch=FetchType.LAZY)    
+    @OneToMany(mappedBy="comunidad")    
 	private List<Suscripcion> suscripciones;
 	
-    @ManyToMany(fetch=FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name="ENCUESTASUSUARIOS",joinColumns={@JoinColumn(name="idUsuario")},inverseJoinColumns={@JoinColumn(name="idEncuesta")})
     private List<Encuesta> encuestas;
     

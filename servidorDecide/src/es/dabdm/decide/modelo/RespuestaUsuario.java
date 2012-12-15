@@ -24,11 +24,11 @@ public class RespuestaUsuario implements Serializable{
 	@SequenceGenerator(name="RESPUESTASUSUARIO_seq",sequenceName="RESPUESTASUSUARIO_seq")	
 	private Integer idRespuestaUsuario;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="IDUSUARIO")
 	private Usuario usuario;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="IDRESPUESTAPOSIBLE")
 	private RespuestaPosible respuesta;
 

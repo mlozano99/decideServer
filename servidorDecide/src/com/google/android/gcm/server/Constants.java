@@ -34,7 +34,7 @@ public final class Constants {
   /**
    * HTTP parameter for collapse key.
    */
-  public static final String PARAM_COLLAPSE_KEY = "collapse_key";
+  public static final String PARAM_COLLAPSE_KEY = "no_collapse_key";//"collapse_key";
 
   /**
    * HTTP parameter for delaying the message delivery if the device is idle.

@@ -35,6 +35,12 @@ public class RespuestaPosible implements Serializable{
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
+
+	@Override
+	public String toString() {
+		return "RespuestaPosible [idRespuestaPosible=" + idRespuestaPosible
+				+ ", valor=" + valor + "]";
+	}
 	
   
 }

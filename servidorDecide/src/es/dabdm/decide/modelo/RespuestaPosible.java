@@ -23,7 +23,7 @@ public class RespuestaPosible implements Serializable{
 	@SequenceGenerator(name="RESPUESTASPOSIBLES_seq",sequenceName="RESPUESTASPOSIBLES_seq")
 	private Integer idRespuestaPosible;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="IDPREGUNTA")
 	private Pregunta pregunta;
 
