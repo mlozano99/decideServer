@@ -81,9 +81,9 @@ public class ServicioConsultas {
 				                .uniqueResult();
 	}
 	
-	public void altaUsuario(Usuario usuario){
-		try {
-			grabarObjeto(usuario);
+	public void altaUsuario( es.dabdm.decide.dto.Usuario usuario){
+		try {			
+			grabarObjeto(new Usuario(usuario.getEmail(), usuario.getIdRegistration(), usuario.getTelefono(), usuario.getNombre(), usuario.getPublicidad()));
 			UtilidadHibernate.commit();
 			System.out.println("Usuario dado de alta. email->"+usuario.getEmail());
 		} catch (Exception e) {

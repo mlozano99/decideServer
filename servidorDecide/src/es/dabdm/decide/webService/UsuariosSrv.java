@@ -3,11 +3,10 @@ package es.dabdm.decide.webService;
 import java.util.Date;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 
-import es.dabdm.decide.modelo.Usuario;
+
 import es.dabdm.decide.servicio.ServicioConsultas;
 
 
@@ -20,7 +19,7 @@ public class UsuariosSrv {
 
 	@PUT
 	@Consumes("application/json")
-	public void altaUsuario(Usuario usuario) {
+	public void altaUsuario( es.dabdm.decide.dto.Usuario usuario) {
 		System.out.println("altaUsuario peticion a las " + new Date() );
 		srvConsultas.altaUsuario(usuario);		
 	}
