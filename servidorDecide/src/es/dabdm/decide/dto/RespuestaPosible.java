@@ -2,7 +2,9 @@ package es.dabdm.decide.dto;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class RespuestaPosible implements Serializable{
 
 	private static final long serialVersionUID = -5355438869956833903L;

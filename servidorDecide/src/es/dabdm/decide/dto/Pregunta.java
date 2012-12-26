@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import es.dabdm.decide.modelo.Comunidad;
 
-
+@XmlRootElement
 public class Pregunta implements Serializable{
 
 	private static final long serialVersionUID = 8974664891175454462L;

@@ -2,6 +2,9 @@ package es.dabdm.decide.dto;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = -8594642118817237794L;
@@ -22,7 +25,21 @@ public class Usuario implements Serializable{
 	
 	private String publicidad;
 
+	public Usuario() {
+	}
 	
+
+	public Usuario(String email, String idRegistration, String telefono, String nombre, String publicidad) {
+		super();
+		this.email = email;
+		this.idRegistration = idRegistration;
+		this.telefono = telefono;
+		this.nombre = nombre;
+		this.publicidad = publicidad;
+	}
+
+
+
 	public String getNombre() {
 		return nombre;
 	}

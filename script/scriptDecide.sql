@@ -62,11 +62,14 @@ CREATE TABLE ENCUESTAS(
 CREATE TABLE USUARIOS(
       idUsuario INTEGER NOT NULL PRIMARY KEY
     , email   VARCHAR(100)
-	, idRegistration INTEGER
+	, idRegistration varchar(500)
 	, telefono   VARCHAR(20)
 	, nombre   VARCHAR(100)
 	, publicidad   VARCHAR(1)
 );  
+
+ALTER TABLE usuarios ALTER COLUMN idregistration varchar(500);
+ALTER TABLE usuarios ADD CONSTRAINT usuariosEmail_uk UNIQUE (email);
 
 CREATE TABLE ENCUESTASUSUARIOS(
      idEncuesta INTEGER NOT NULL 

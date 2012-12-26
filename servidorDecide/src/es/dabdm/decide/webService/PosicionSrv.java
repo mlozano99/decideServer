@@ -19,9 +19,9 @@ public class PosicionSrv {
 
 	@PUT
 	@Consumes("application/x-www-form-urlencoded")
-	public void posicionUsuario(@FormParam("longitud")  double longitud,@FormParam("latitud")  double latitud) {
+	public void posicionUsuario(@FormParam("longitud")  double longitud,@FormParam("latitud")  double latitud,@FormParam("email") String email) {
 
-		System.out.println("posicionUsuario peticion a las " + new Date() + ", longitud="+longitud  + ", latitud="+latitud );
+		System.out.println("posicionUsuario peticion a las " + new Date() + ", longitud="+longitud  + ", latitud="+latitud + ", email="+ email);
 		
 	}
 }

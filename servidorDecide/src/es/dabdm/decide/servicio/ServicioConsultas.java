@@ -59,9 +59,10 @@ public class ServicioConsultas {
 	
 	public List<Comunidad> getComunidadSuscritas(String email){
 		Session sesion = UtilidadHibernate.getSesion();
-		return sesion.createQuery("SELECT comunidad d" +
-				                   " FROM es.dabdm.decide.modelo.Suscripcion " +
-				                  " WHERE usuario.email = :email ")
+		return sesion.createQuery("SELECT s.comunidad " +
+				                   " FROM es.dabdm.decide.modelo.Suscripcion s" +
+				                  " WHERE s.usuario.email = :email ")
+				     .setString("email", email)
 				     .list();
 	}
 	
@@ -80,6 +81,24 @@ public class ServicioConsultas {
 				                .setString("email", email)
 				                .uniqueResult();
 	}
+	
+	/**
+	 * Consulta los datos del usuario y los convierte al DTO usado en la app android
+	 * @param email
+	 * @return
+	 */
+	public es.dabdm.decide.dto.Usuario getUsuarioDTOByEmail(String email){
+		 Usuario usuario = getUsuarioByEmail(email);		 
+		 es.dabdm.decide.dto.Usuario usuarioDTO = null;
+		 try {
+			 usuarioDTO = new es.dabdm.decide.dto.Usuario(usuario.getEmail(), usuario.getIdRegistration(), usuario.getTelefono(), usuario.getNombre(), usuario.getPublicidad());
+		} catch (Exception e) {
+		     System.out.println("Error en getUsuarioDTOByEmail->" +e.getMessage());
+		}
+		return usuarioDTO;
+	}
+	
+	
 	
 	public void altaUsuario( es.dabdm.decide.dto.Usuario usuario){
 		try {			

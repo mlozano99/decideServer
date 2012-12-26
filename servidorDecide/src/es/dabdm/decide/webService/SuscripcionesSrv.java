@@ -22,7 +22,7 @@ public class SuscripcionesSrv {
 
 	@DELETE
 	@Consumes("application/x-www-form-urlencoded")
-	public void deSuscribirUsusarioComunidad(@FormParam("email") String email, @FormParam("idComunidad")Integer idComunidad) {
+	public void deSuscribirUsusarioComunidad(@QueryParam("email") String email, @QueryParam("idComunidad")Integer idComunidad) {
 		System.out.println("deSuscribirUsusarioComunidad peticion a las " + new Date() + "  ,email=" + email );
 		srvConsultas.desuscribirUsuario(email, idComunidad);
 	}	
@@ -49,6 +49,11 @@ public class SuscripcionesSrv {
 		ListaComunidades lista = new ListaComunidades();
 		lista.setComunidades( srvConsultas.getComunidadSuscritas(email) );
 
+		////////////// TEMPORAL!!!! para que siempre de comunidades!!!
+		if(lista.getComunidades()==null || lista.getComunidades().size()==0){
+			lista.setComunidades( srvConsultas.getComunidades());
+		}
+		
 		return lista;
 
 	}
