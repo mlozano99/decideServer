@@ -53,6 +53,7 @@ public class ComunityManager implements Serializable{
 	public void setIdManager(Integer idManager) {
 		this.idManager = idManager;
 	}
+	
 	/*
 	public List<Comunidad> getComunidades() {
 	return comunidades;
@@ -60,4 +61,6 @@ public class ComunityManager implements Serializable{
 	public void setComunidades(List<Comunidad> comunidades) {
 		this.comunidades = comunidades;
 	}*/
+	
 }
+

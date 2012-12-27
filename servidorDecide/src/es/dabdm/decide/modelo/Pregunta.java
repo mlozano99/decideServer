@@ -92,5 +92,5 @@ public class Pregunta implements Serializable{
 		this.idPregunta = idPregunta;
 	}
 	
-	
+
 }

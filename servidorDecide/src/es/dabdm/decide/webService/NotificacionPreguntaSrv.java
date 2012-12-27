@@ -1,9 +1,7 @@
 package es.dabdm.decide.webService;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -15,13 +13,11 @@ import javax.ws.rs.QueryParam;
 import com.google.android.gcm.server.Constants;
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Message.Builder;
-import com.google.android.gcm.server.MulticastResult;
 import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-import es.dabdm.decide.dto.Pregunta;
-import es.dabdm.decide.dto.RespuestaPosible;
 import es.dabdm.decide.servicio.ServicioConsultas;
 
 @Path("/notificarPregunta")
@@ -41,7 +37,7 @@ public class NotificacionPreguntaSrv {
 
 		System.out.println("notificaUnaPregunta peticion a las " + new Date() + "  ,notificar idPregunta=" + idPregunta + "  ,notificar regId=" + regId);
 
-		Pregunta pregunta = srvConsultas.getPreguntaDTO( srvConsultas.getPregunta(idPregunta) );
+		es.dabdm.decide.dto.Pregunta pregunta = srvConsultas.getPreguntaDTO( srvConsultas.getPregunta(idPregunta) );
 		if(pregunta==null){
 			return "No se ha encontrado la pregunta con id="+idPregunta;
 		}
@@ -61,8 +57,9 @@ public class NotificacionPreguntaSrv {
 				Builder builder = new Message.Builder(); 
 				
 				
-				Gson gson = new Gson();
-				builder.addData("pregunta", gson.toJson(pregunta));				
+				Gson gson = new GsonBuilder().setDateFormat(Constants.FORMATO_FECHA).create();				
+				String datosPreguntaGson =  gson.toJson(pregunta);
+				builder.addData("pregunta", datosPreguntaGson);				
 				//builder.addData("pregunta", "555444333222111");
 				Message message = builder.build();
 				

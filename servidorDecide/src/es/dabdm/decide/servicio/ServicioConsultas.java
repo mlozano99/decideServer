@@ -8,6 +8,7 @@ import org.hibernate.Session;
 
 import util.UtilidadHibernate;
 import es.dabdm.decide.modelo.Comunidad;
+import es.dabdm.decide.modelo.ComunityManager;
 import es.dabdm.decide.modelo.Pregunta;
 import es.dabdm.decide.modelo.RespuestaPosible;
 import es.dabdm.decide.modelo.RespuestaUsuario;
@@ -182,13 +183,36 @@ public class ServicioConsultas {
 	public es.dabdm.decide.dto.Pregunta getPreguntaDTO(Pregunta pregunta){
 		es.dabdm.decide.dto.Pregunta preguntaDTO =null;
 		try {
+           //Pregunta 
+		   preguntaDTO = new es.dabdm.decide.dto.Pregunta(pregunta.getIdPregunta(), pregunta.getComunidad(), pregunta.getTexto());
+		   preguntaDTO.setFechaLimite(pregunta.getEncuesta().getFechaLimite());
+		   
+			//Comunidad
+		   Comunidad comunidad = new Comunidad();
+           comunidad.setAlcance(pregunta.getComunidad().getAlcance());
+           comunidad.setDescripcion(pregunta.getComunidad().getDescripcion());
+           comunidad.setNombre(pregunta.getComunidad().getNombre());
+           comunidad.setSuscrito(pregunta.getComunidad().getSuscrito());
+           comunidad.setTipo(pregunta.getComunidad().getTipo());
+           comunidad.setTwitter(pregunta.getComunidad().getTwitter());
+           comunidad.setGps(pregunta.getComunidad().getGps());
+           comunidad.setIdComunidad(pregunta.getComunidad().getIdComunidad());
+           comunidad.setRadio(pregunta.getComunidad().getRadio());
+           // Gestor
+           ComunityManager gestor = new ComunityManager();
+           gestor.setIdManager( pregunta.getComunidad().getGestor().getIdManager());
+           gestor.setNombre( pregunta.getComunidad().getGestor().getNombre());                     
            
-           preguntaDTO = new es.dabdm.decide.dto.Pregunta(pregunta.getIdPregunta(), pregunta.getComunidad(), pregunta.getTexto());
-           preguntaDTO.setFechaLimite(pregunta.getEncuesta().getFechaLimite());
-		   List<es.dabdm.decide.dto.RespuestaPosible> respuestasDTO = new ArrayList<es.dabdm.decide.dto.RespuestaPosible>();		   
+		             
+           //Establecer comunidad y su gestor
+           comunidad.setGestor(gestor);
+		   preguntaDTO.setComunidad(comunidad);
+           
+           List<es.dabdm.decide.dto.RespuestaPosible> respuestasDTO = new ArrayList<es.dabdm.decide.dto.RespuestaPosible>();		   
            for(RespuestaPosible r :pregunta.getRespuestasPosibles()){
 			   	 respuestasDTO.add(new es.dabdm.decide.dto.RespuestaPosible(r.getIdRespuestaPosible(),r.getValor()));
 		   }
+           preguntaDTO.setRespuestasPosibles(respuestasDTO);
            
            System.out.println("preguntaDTO ->"+pregunta.getTexto());
 		} catch (Exception e) {

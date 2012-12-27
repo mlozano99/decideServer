@@ -20,6 +20,11 @@ package com.google.android.gcm.server;
  */
 public final class Constants {
 
+	/**
+	 * Mismo formato que el declarado en 'decide' android
+	 */
+  public static final String FORMATO_FECHA = "yyyy-MM-dd HH:mm:ss";
+	
   /**
    * Endpoint for sending messages.
    */
