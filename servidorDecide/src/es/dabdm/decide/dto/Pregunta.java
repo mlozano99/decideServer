@@ -15,7 +15,7 @@ public class Pregunta implements Serializable{
 
 	private Integer idPregunta;
 	
-	private Comunidad comunidad;
+	private Integer idComunidad;
 
 	private String texto;
     
@@ -26,10 +26,10 @@ public class Pregunta implements Serializable{
 	public Pregunta() {
 	}
 	
-	public Pregunta(Integer idPregunta, Comunidad comunidad, String texto) {
+	public Pregunta(Integer idPregunta, Integer idComunidad, String texto) {
 		super();
 		this.idPregunta = idPregunta;
-		this.comunidad = comunidad;
+		this.idComunidad = idComunidad;
 		this.texto = texto;
 	}
 
@@ -41,12 +41,12 @@ public class Pregunta implements Serializable{
 		this.idPregunta = idPregunta;
 	}
 
-	public Comunidad getComunidad() {
-		return comunidad;
+	public Integer getIdComunidad() {
+		return idComunidad;
 	}
 
-	public void setComunidad(Comunidad comunidad) {
-		this.comunidad = comunidad;
+	public void setIdComunidad(Integer idComunidad) {
+		this.idComunidad = idComunidad;
 	}
 
 	public String getTexto() {
@@ -75,8 +75,8 @@ public class Pregunta implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Pregunta [idPregunta=" + idPregunta + ", comunidad="
-				+ comunidad + ", texto=" + texto + ", fechaLimite="
+		return "Pregunta [idPregunta=" + idPregunta + ", idComunidad="
+				+ idComunidad + ", texto=" + texto + ", fechaLimite="
 				+ fechaLimite + ", respuestasPosibles=" + respuestasPosibles
 				+ "]";
 	}

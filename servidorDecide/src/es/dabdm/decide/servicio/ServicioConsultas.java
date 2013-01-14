@@ -42,7 +42,7 @@ public class ServicioConsultas {
 		Session sesion = UtilidadHibernate.getSesion();
 		
 		@SuppressWarnings("unchecked")
-		List<Comunidad> comunidades= sesion.createQuery("FROM es.dabdm.decide.modelo.Comunidad ORDER BY nombre" )   	
+		List<Comunidad> comunidades= sesion.createQuery("FROM es.dabdm.decide.modelo.Comunidad ORDER BY idComunidad" )   //nombre	
 									       .list();
 		
 		List<Comunidad> comunidadesSuscritas = getComunidadSuscritas(email);
@@ -62,7 +62,8 @@ public class ServicioConsultas {
 		Session sesion = UtilidadHibernate.getSesion();
 		return sesion.createQuery("SELECT s.comunidad " +
 				                   " FROM es.dabdm.decide.modelo.Suscripcion s" +
-				                  " WHERE s.usuario.email = :email ")
+				                  " WHERE s.usuario.email = :email " +
+				               " ORDER BY s.comunidad.nombre")
 				     .setString("email", email)
 				     .list();
 	}
@@ -107,6 +108,7 @@ public class ServicioConsultas {
 			UtilidadHibernate.commit();
 			System.out.println("Usuario dado de alta. email->"+usuario.getEmail());
 		} catch (Exception e) {
+			UtilidadHibernate.rollBack();
 			System.out.println("Error en altaUsuario a las " + new Date() + " " + e.getMessage());
 		}
 	}
@@ -142,6 +144,7 @@ public class ServicioConsultas {
 			borrarObjeto(suscripcion);
 			UtilidadHibernate.commit();
 		} catch (Exception e) {
+			UtilidadHibernate.rollBack();
 			System.out.println("Error en desuscribirUsuario a las " + new Date() + " " + e.getMessage());
 		}  		
 	}
@@ -157,6 +160,7 @@ public class ServicioConsultas {
 			grabarObjeto(suscripcion);
 			UtilidadHibernate.commit();
 		} catch (Exception e) {
+			UtilidadHibernate.rollBack();
 			System.out.println("Error en suscribirUsuario a las " + new Date() + " " + e.getMessage());
 		}  		
 	}
@@ -184,30 +188,9 @@ public class ServicioConsultas {
 		es.dabdm.decide.dto.Pregunta preguntaDTO =null;
 		try {
            //Pregunta 
-		   preguntaDTO = new es.dabdm.decide.dto.Pregunta(pregunta.getIdPregunta(), pregunta.getComunidad(), pregunta.getTexto());
+		   preguntaDTO = new es.dabdm.decide.dto.Pregunta(pregunta.getIdPregunta(), pregunta.getComunidad().getIdComunidad(), pregunta.getTexto());
 		   preguntaDTO.setFechaLimite(pregunta.getEncuesta().getFechaLimite());
-		   
-			//Comunidad
-		   Comunidad comunidad = new Comunidad();
-           comunidad.setAlcance(pregunta.getComunidad().getAlcance());
-           comunidad.setDescripcion(pregunta.getComunidad().getDescripcion());
-           comunidad.setNombre(pregunta.getComunidad().getNombre());
-           comunidad.setSuscrito(pregunta.getComunidad().getSuscrito());
-           comunidad.setTipo(pregunta.getComunidad().getTipo());
-           comunidad.setTwitter(pregunta.getComunidad().getTwitter());
-           comunidad.setGps(pregunta.getComunidad().getGps());
-           comunidad.setIdComunidad(pregunta.getComunidad().getIdComunidad());
-           comunidad.setRadio(pregunta.getComunidad().getRadio());
-           // Gestor
-           ComunityManager gestor = new ComunityManager();
-           gestor.setIdManager( pregunta.getComunidad().getGestor().getIdManager());
-           gestor.setNombre( pregunta.getComunidad().getGestor().getNombre());                     
-           
-		             
-           //Establecer comunidad y su gestor
-           comunidad.setGestor(gestor);
-		   preguntaDTO.setComunidad(comunidad);
-           
+		   	
            List<es.dabdm.decide.dto.RespuestaPosible> respuestasDTO = new ArrayList<es.dabdm.decide.dto.RespuestaPosible>();		   
            for(RespuestaPosible r :pregunta.getRespuestasPosibles()){
 			   	 respuestasDTO.add(new es.dabdm.decide.dto.RespuestaPosible(r.getIdRespuestaPosible(),r.getValor()));
@@ -252,6 +235,7 @@ public class ServicioConsultas {
 				  System.out.println("responderPregunta correctamente..." );
 			  }
 		 } catch (Exception e) {
+			UtilidadHibernate.rollBack();
 			System.out.println("Error en responderPregunta a las " + new Date() + " " + e.getMessage());
 		 } 
 	  }
